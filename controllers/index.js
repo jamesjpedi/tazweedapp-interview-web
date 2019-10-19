@@ -10,7 +10,7 @@ const Index = {
 
 
     login : (req, res) => {
-        res.render('login', { title: 'Login' });
+        res.render('login', { title: 'Login', url : req.originalUrl });
     },
 
     submitLogin : async (req, res) => {
@@ -79,6 +79,11 @@ const Index = {
             res.render('register', { error: 'Something went wrong' });
             return;
         }
+    },
+
+    logout : (req, res) => {
+        req.session.destroy(() => {});
+        res.redirect('/login')
     }
 }
 
